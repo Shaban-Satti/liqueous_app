@@ -68,7 +68,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 1), () {
       setState(() {
         isanimate = true;
       });
@@ -84,12 +84,12 @@ class _SplashScreenState extends State<SplashScreen> {
         body: Stack(
           children: [
             AnimatedPositioned(
-                top: m.height * .5,
+                top: m.height * .4,
                 right: isanimate ? m.width * .25 : m.width * .05,
                 width: m.width * .5,
-                duration: Duration(seconds: 3),
+                duration: const Duration(seconds: 3),
                 onEnd: () {
-                  Get.to(LoginScreen());
+                  Get.to(const LoginScreen());
                 },
                 child: Image.asset(
                   'images/logo-full.png',

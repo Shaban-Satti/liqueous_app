@@ -1,7 +1,14 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:liqueous_app/Component/roundbutton.dart';
+import 'package:liqueous_app/Screen/HomeScreen/home_screen.dart';
+
+import '../../ButomNavigation/buttomnavigation.dart';
+import '../dashboard.dart';
 
 class OTPScreen extends StatefulWidget {
   const OTPScreen({super.key});
@@ -25,21 +32,30 @@ class _OTPScreenState extends State<OTPScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: (AppBar(
-          // leading: Icon(Icons.arrow_back_ios_outlined),
-          )),
+        leading: IconButton(
+          icon: const Image(
+            image: AssetImage('images/icon/previous.png'),
+            color: Colors.grey,
+            height: 25,
+          ),
+          onPressed: () {
+            Get.back();
+          },
+        ),
+      )),
       body: Stack(children: [
         Column(
           //mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(' Enter OTP',
+            const Text('  Enter OTP',
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
             const SizedBox(
               height: 20,
             ),
             const Row(
               children: [
-                Text('  Kindly Enter the OTP sent to '),
+                Text('    Kindly Enter the OTP sent to '),
                 Text(
                   '03175836948',
                   style: TextStyle(fontWeight: FontWeight.bold),
@@ -59,7 +75,7 @@ class _OTPScreenState extends State<OTPScreen> {
                       children: [
                         SizedBox(
                           height: 60,
-                          width: 50,
+                          width: 60,
                           child: TextFormField(
                             onChanged: (vale) {
                               if (vale.length == 1) {
@@ -86,7 +102,7 @@ class _OTPScreenState extends State<OTPScreen> {
                         ),
                         SizedBox(
                           height: 60,
-                          width: 50,
+                          width: 60,
                           child: TextFormField(
                             onChanged: (vale) {
                               if (vale.length == 1) {
@@ -113,7 +129,7 @@ class _OTPScreenState extends State<OTPScreen> {
                         ),
                         SizedBox(
                           height: 60,
-                          width: 50,
+                          width: 60,
                           child: TextFormField(
                             onChanged: (vale) {
                               if (vale.length == 1) {
@@ -140,7 +156,7 @@ class _OTPScreenState extends State<OTPScreen> {
                         ),
                         SizedBox(
                           height: 60,
-                          width: 50,
+                          width: 60,
                           child: TextFormField(
                             onChanged: (vale) {
                               if (vale.length == 1) {
@@ -174,7 +190,17 @@ class _OTPScreenState extends State<OTPScreen> {
             ),
             Padding(
               padding: const EdgeInsets.all(20),
-              child: RoundButton(title: 'Verify OTP', onPress: () {}),
+              child: RoundButton(
+                  title: 'Verify OTP',
+                  onPress: () {
+                    Get.to(
+                        //MyApp()
+                        //MyHomePage()
+
+                        bottomNavigationBar()
+                        //HomeScreen()
+                        );
+                  }),
             ),
             const Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -192,13 +218,32 @@ class _OTPScreenState extends State<OTPScreen> {
             ),
           ],
         ),
-        Positioned(
+        const Positioned(
             top: 350,
             child: Image(image: AssetImage('images/Graphic_Left.png'))),
-        Positioned(
+        const Positioned(
             top: 500,
             right: 0,
             child: Image(image: AssetImage('images/Graphic_Right.png'))),
+        Positioned(
+            top: 500,
+            // left: 20,
+            child: Container(
+                height: 500,
+                width: MediaQuery.sizeOf(context).width,
+                // color: Colors.grey,
+                decoration: const ShapeDecoration(
+                  //  gradient: LinearGradient(colors: Colors.accents),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(150),
+                      topRight: Radius.circular(150),
+                    ),
+                  ),
+                ),
+                child: Image(
+                  image: AssetImage('images/Frame 2.png'),
+                ))),
       ]),
     );
   }
