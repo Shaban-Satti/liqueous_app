@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 import '../../Component/roundbutton.dart';
+import '../../Drawer/end_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -23,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
         ),
-        drawer: Drawer(),
+        endDrawer: MyDrawer(),
         body: Column(
           children: [
             Container(
