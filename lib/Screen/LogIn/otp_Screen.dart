@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:liqueous_app/Component/roundbutton.dart';
 import 'package:liqueous_app/Screen/HomeScreen/home_screen.dart';
 
-import '../../ButomNavigation/buttomnavigation.dart';
+import '../../Component/ButomNavigation/buttomnavigation.dart';
 import '../dashboard.dart';
 
 class OTPScreen extends StatefulWidget {

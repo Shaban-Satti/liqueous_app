@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="liqueous_app"
+        android:label="Liqueous"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

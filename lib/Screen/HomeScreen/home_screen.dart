@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:liqueous_app/View%20all/viewall.dart';
 
 import '../../Component/roundbutton.dart';
+import '../../Component/Drawer/end_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -23,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
         ),
-        drawer: Drawer(),
+        endDrawer: const MyDrawer(),
         body: Column(
           children: [
             Container(
@@ -387,13 +390,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       letterSpacing: -0.32,
                     ),
                   ),
-                  Text(
-                    'View all',
-                    style: GoogleFonts.mulish(
-                      color: Color(0xFF808080),
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      letterSpacing: -0.24,
+                  InkWell(
+                    onTap: () {
+                      Get.to(ViewAllScreen());
+                    },
+                    child: Text(
+                      'View all',
+                      style: GoogleFonts.mulish(
+                        color: Color(0xFF808080),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        letterSpacing: -0.24,
+                      ),
                     ),
                   )
                 ],
