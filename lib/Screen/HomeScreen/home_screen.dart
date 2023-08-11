@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:liqueous_app/View%20all/viewall.dart';
 
 import '../../Component/roundbutton.dart';
-import '../../Drawer/end_drawer.dart';
+import '../../Component/Drawer/end_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,6 +16,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -21,10 +24,23 @@ class _HomeScreenState extends State<HomeScreen> {
         return false; // Prevent back navigation
       },
       child: Scaffold(
+        key: _scaffoldKey,
         appBar: AppBar(
           automaticallyImplyLeading: false,
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: SvgPicture.asset('images/svg/notification.svg'),
+            ),
+            IconButton(
+              onPressed: () {
+                _scaffoldKey.currentState!.openEndDrawer();
+              },
+              icon: SvgPicture.asset('images/svg/menu.svg'),
+            ),
+          ],
         ),
-        endDrawer: MyDrawer(),
+        endDrawer: const MyDrawer(),
         body: Column(
           children: [
             Container(
@@ -35,17 +51,13 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const CircleAvatar(
-                    backgroundColor: Colors.blue,
-                    radius: 40,
-                  ),
                   const SizedBox(width: 16), // Add spacing between widgets
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Hello Ian',
+                        'Dashboard',
                         style: GoogleFonts.mulish(
                           color: Colors.black,
                           fontSize: 22,
@@ -54,56 +66,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       Text(
-                        'ID: GNGO0L6LZO',
+                        'Here’s your statistics',
                         style: GoogleFonts.mulish(
                           color: Color(0xFF656565),
-                          fontSize: 9,
+                          fontSize: 10,
                           fontWeight: FontWeight.w400,
-                          letterSpacing: -0.18,
+                          letterSpacing: -0.20,
                         ),
                       )
                     ],
-                  ),
-                  const SizedBox(width: 16),
-                  Container(
-                    width: 10.0, // Adjust the width based on your needs
-                    height: 12.0, // Adjust the height based on your needs
-                    child: const Icon(
-                      Icons.email,
-                      size: 12,
-                    ),
-                  ),
-
-                  const SizedBox(width: 5), // Add more spacing
-                  Text(
-                    'Not Verified',
-                    style: GoogleFonts.mulish(
-                      color: Color(0xFFF80000),
-                      fontSize: 9,
-                      fontWeight: FontWeight.w400,
-                      letterSpacing: -0.18,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  const Image(
-                    image: AssetImage('images/icon/time.png'),
-                    height: 12,
-                    width: 12,
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-
-                  Text(
-                    DateFormat('MMM d, yyyy').format(DateTime.now()),
-                    style: GoogleFonts.mulish(
-                      color: Color(0xFF22C553),
-                      fontSize: 9,
-                      fontWeight: FontWeight.w400,
-                      letterSpacing: -0.18,
-                    ),
                   ),
                 ],
               ),
@@ -388,13 +359,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       letterSpacing: -0.32,
                     ),
                   ),
-                  Text(
-                    'View all',
-                    style: GoogleFonts.mulish(
-                      color: Color(0xFF808080),
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      letterSpacing: -0.24,
+                  InkWell(
+                    onTap: () {
+                      Get.to(ViewAllScreen());
+                    },
+                    child: Text(
+                      'View all',
+                      style: GoogleFonts.mulish(
+                        color: Color(0xFF808080),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        letterSpacing: -0.24,
+                      ),
                     ),
                   )
                 ],
