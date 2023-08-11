@@ -6,6 +6,8 @@ import 'package:intl/intl.dart';
 import 'package:liqueous_app/Component/Drawer/end_drawer.dart';
 
 import '../../Component/roundbutton.dart';
+import '../Component/viewall_container.dart';
+import 'Filter/filter.dart';
 
 class ViewAllScreen extends StatefulWidget {
   const ViewAllScreen({super.key});
@@ -15,6 +17,15 @@ class ViewAllScreen extends StatefulWidget {
 }
 
 class _ViewAllScreenState extends State<ViewAllScreen> {
+  Future<void> _showFilterDialog(BuildContext context) async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return FilterDialog();
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -35,489 +46,213 @@ class _ViewAllScreenState extends State<ViewAllScreen> {
           ),
         )),
         endDrawer: MyDrawer(),
-        body: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    children: [
-                      Text(
-                        'Loan Insights',
-                        style: GoogleFonts.mulish(
-                          color: Colors.black,
-                          fontSize: 22,
-                          fontWeight: FontWeight.w800,
-                          letterSpacing: -0.44,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      children: [
+                        Text(
+                          'Loan Insights',
+                          style: GoogleFonts.mulish(
+                            color: Colors.black,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w800,
+                            letterSpacing: -0.44,
+                          ),
                         ),
-                      ),
-                      Text(
-                        'Here’s your insight of loan',
-                        style: GoogleFonts.mulish(
-                          color: Color(0xFF656565),
-                          fontSize: 10,
-                          fontWeight: FontWeight.w400,
-                          letterSpacing: -0.20,
+                        Text(
+                          'Here’s your insight of loan',
+                          style: GoogleFonts.mulish(
+                            color: Color(0xFF656565),
+                            fontSize: 10,
+                            fontWeight: FontWeight.w400,
+                            letterSpacing: -0.20,
+                          ),
+                        )
+                      ],
+                    ),
+                    Container(
+                        width: 26,
+                        height: 25,
+                        decoration: ShapeDecoration(
+                          color: Color(0xFF0D9488),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
                         ),
-                      )
-                    ],
-                  ),
-                  Container(
-                      width: 30,
-                      height: 30,
-                      decoration: ShapeDecoration(
-                        color: Color(0xFF0D9488),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                      ),
-                      child: SvgPicture.asset(
-                        'images/svg/refresh2.svg',
-                        height: 2,
-                        width: 5,
-                      )
+                        child: SvgPicture.asset(
+                          'images/svg/refresh.svg',
+                          height: 3,
+                          width: 16,
+                        )
 
-                      //Image(image: AssetImage('images/icon/refresh2.png')),
-                      )
-                ],
+                        //Image(image: AssetImage('images/icon/refresh2.png')),
+                        )
+                  ],
+                ),
               ),
-            ),
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                        hintText: 'Search stocks.',
-                        prefixIcon: Icon(Icons.search),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30.0),
-                        )),
-                  ),
-                ),
-                Container(
-                  width: 360,
-                  height: 58,
-                  decoration: ShapeDecoration(
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(width: 0.50, color: Color(0xFFD9D9D9)),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Container(
-                          height: 30,
-                          width: 30,
-                          decoration: const BoxDecoration(
-                              color: Colors.white, shape: BoxShape.circle),
-                          child: const Center(
-                            child: Image(
-                              image: AssetImage('images/icon/google.png'),
-                              height: 23,
-                              width: 23,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Column(
-                          children: [
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Text(
-                              'GOOGL',
-                              style: GoogleFonts.mulish(
-                                color: Colors.black,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w700,
-                                letterSpacing: -0.24,
-                              ),
-                            ),
-                            Text(
-                              'Google, Inc',
-                              style: GoogleFonts.mulish(
-                                color: Color(0xFF808080),
-                                fontSize: 8,
-                                fontWeight: FontWeight.w300,
-                                letterSpacing: -0.16,
-                              ),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          width: 80,
-                        ),
-                        SvgPicture.asset(
-                          'images/svg/stock Graph.svg',
-                          width: 78,
-                          height: 25,
-                        ),
-                        const SizedBox(
-                          width: 40,
-                        ),
-                        Column(
-                          children: [
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            Text(
-                              '\$128.64',
-                              style: GoogleFonts.mulish(
-                                color: Colors.black,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w700,
-                                letterSpacing: -0.24,
-                              ),
-                            ),
-                            Text(
-                              '+ 4.9%',
-                              style: GoogleFonts.mulish(
-                                color: Color(0xFF7AE3C0),
-                                fontSize: 8,
-                                fontWeight: FontWeight.w700,
-                                letterSpacing: -0.16,
-                              ),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 360,
-                  height: 58,
-                  decoration: ShapeDecoration(
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(width: 0.50, color: Color(0xFFD9D9D9)),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Container(
-                          height: 30,
-                          width: 30,
-                          decoration: const BoxDecoration(
-                              color: Colors.white, shape: BoxShape.circle),
-                          child: const Center(
-                            child: Image(
-                              image: AssetImage('images/icon/Netflix.png'),
-                              height: 23,
-                              width: 23,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Column(
-                          children: [
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Text(
-                              'NETFLX',
-                              style: GoogleFonts.mulish(
-                                color: Colors.black,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w700,
-                                letterSpacing: -0.24,
-                              ),
-                            ),
-                            Text(
-                              'Netflx, Inc',
-                              style: GoogleFonts.mulish(
-                                color: Color(0xFF808080),
-                                fontSize: 8,
-                                fontWeight: FontWeight.w300,
-                                letterSpacing: -0.16,
-                              ),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          width: 80,
-                        ),
-                        SvgPicture.asset(
-                          'images/svg/stock Graph red.svg',
-                          width: 78,
-                          height: 25,
-                        ),
-                        const SizedBox(
-                          width: 40,
-                        ),
-                        Column(
-                          children: [
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            Text(
-                              '\$429.7',
-                              style: GoogleFonts.mulish(
-                                color: Colors.black,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w700,
-                                letterSpacing: -0.24,
-                              ),
-                            ),
-                            Text(
-                              '-3.63%',
-                              style: GoogleFonts.mulish(
-                                color: Color(0xFFF80000),
-                                fontSize: 8,
-                                fontWeight: FontWeight.w700,
-                                letterSpacing: -0.16,
-                              ),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 360,
-                  height: 58,
-                  decoration: ShapeDecoration(
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(width: 0.50, color: Color(0xFFD9D9D9)),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Container(
-                          height: 30,
-                          width: 30,
-                          decoration: const BoxDecoration(
-                              color: Colors.white, shape: BoxShape.circle),
-                          child: const Center(
-                            child: Image(
-                              image: AssetImage('images/icon/Meta.png'),
-                              height: 23,
-                              width: 23,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Column(
-                          children: [
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Text(
-                              'MEETA',
-                              style: GoogleFonts.mulish(
-                                color: Colors.black,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w700,
-                                letterSpacing: -0.24,
-                              ),
-                            ),
-                            Text(
-                              'Meeta, Inc',
-                              style: GoogleFonts.mulish(
-                                color: Color(0xFF808080),
-                                fontSize: 8,
-                                fontWeight: FontWeight.w300,
-                                letterSpacing: -0.16,
-                              ),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          width: 80,
-                        ),
-                        SvgPicture.asset(
-                          'images/svg/stock Graph red.svg',
-                          width: 78,
-                          height: 25,
-                        ),
-                        const SizedBox(
-                          width: 40,
-                        ),
-                        Column(
-                          children: [
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            Text(
-                              '\$314.31',
-                              style: GoogleFonts.mulish(
-                                color: Colors.black,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w700,
-                                letterSpacing: -0.24,
-                              ),
-                            ),
-                            Text(
-                              '-2.60%',
-                              style: GoogleFonts.mulish(
-                                color: Color(0xFFF80000),
-                                fontSize: 8,
-                                fontWeight: FontWeight.w700,
-                                letterSpacing: -0.16,
-                              ),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
-                    child: Container(
-                      width: 360,
-                      height: 58,
-                      decoration: ShapeDecoration(
-                        shape: RoundedRectangleBorder(
-                          side:
-                              BorderSide(width: 0.50, color: Color(0xFFD9D9D9)),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Container(
-                              height: 30,
-                              width: 30,
-                              decoration: const BoxDecoration(
-                                  color: Colors.white, shape: BoxShape.circle),
-                              child: const Center(
-                                child: Image(
-                                  image: AssetImage('images/icon/Apple.png'),
-                                  height: 23,
-                                  width: 23,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            Column(
-                              children: [
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                Text(
-                                  'AAPL',
-                                  style: GoogleFonts.mulish(
-                                    color: Colors.black,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w700,
-                                    letterSpacing: -0.24,
-                                  ),
-                                ),
-                                Text(
-                                  'Apple, Inc',
-                                  style: GoogleFonts.mulish(
-                                    color: Color(0xFF808080),
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w300,
-                                    letterSpacing: -0.16,
-                                  ),
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              width: 80,
-                            ),
-                            SvgPicture.asset(
-                              'images/svg/stock Graph.svg',
-                              width: 78,
-                              height: 25,
-                            ),
-                            const SizedBox(
-                              width: 40,
-                            ),
-                            Column(
-                              children: [
-                                const SizedBox(
-                                  height: 15,
-                                ),
-                                Text(
-                                  '\$192.58',
-                                  style: GoogleFonts.mulish(
-                                    color: Colors.black,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w700,
-                                    letterSpacing: -0.24,
-                                  ),
-                                ),
-                                Text(
-                                  '+ 4.9%',
-                                  style: GoogleFonts.mulish(
-                                    color: Color(0xFF7AE3C0),
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w700,
-                                    letterSpacing: -0.16,
-                                  ),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    )),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Column(
                 children: [
-                  Text(
-                    'Recent News',
-                    style: GoogleFonts.mulish(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w800,
-                      letterSpacing: -0.32,
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                          hintText: 'Search stocks.',
+                          prefixIcon: Icon(Icons.search),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25.0),
+                          )),
                     ),
                   ),
-                  Text(
-                    'See all',
-                    style: GoogleFonts.mulish(
-                      color: Color(0xFF808080),
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      letterSpacing: -0.24,
+                  InkWell(
+                    onTap: () {
+                      _showFilterDialog(context);
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          "Filter & Sort",
+                          style: GoogleFonts.mulish(
+                            fontSize: 9,
+                            fontWeight: FontWeight.w700,
+                            color: Color(0xff808080),
+                            height: 11 / 9,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        SvgPicture.asset('images/svg/filter.svg'),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                      ],
                     ),
-                  )
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  ReuseableContainer(
+                    imageAsset: 'images/icon/Apple.png',
+                    title: 'AAPL',
+                    date: DateFormat('MM/d/yyyy').format(DateTime.now()),
+                    time: DateFormat('h:mm a').format(DateTime.now()),
+                    amount: '\$1,28,034.64',
+                    category: 'Financing',
+                    action: 'Quote',
+                    subAction: 'Self',
+                  ),
+                  ReuseableContainer(
+                    imageAsset: 'images/icon/Netflix.png',
+                    title: 'NETFLIX',
+                    date: DateFormat('MM/d/yyyy').format(DateTime.now()),
+                    time: DateFormat('h:mm a').format(DateTime.now()),
+                    amount: '\$1,28,034.64',
+                    category: 'Sale',
+                    action: 'Quote',
+                    subAction: 'Agent',
+                  ),
+                  ReuseableContainer(
+                    imageAsset: 'images/icon/google.png',
+                    title: 'GOOGL',
+                    date: DateFormat('MM/d/yyyy').format(DateTime.now()),
+                    time: DateFormat('h:mm a').format(DateTime.now()),
+                    amount: '\$1,28,034.64',
+                    category: 'Financing',
+                    action: 'Quote',
+                    subAction: 'Self',
+                  ),
+                  ReuseableContainer(
+                    imageAsset: 'images/icon/Meta.png',
+                    title: 'META',
+                    date: DateFormat('MM/d/yyyy').format(DateTime.now()),
+                    time: DateFormat('h:mm a').format(DateTime.now()),
+                    amount: '\$1,28,034.64',
+                    category: 'Financing',
+                    action: 'Quote',
+                    subAction: 'Self',
+                  ),
+                  ReuseableContainer(
+                    imageAsset: 'images/icon/Twitter.png',
+                    title: 'TWITER',
+                    date: DateFormat('MM/d/yyyy').format(DateTime.now()),
+                    time: DateFormat('h:mm a').format(DateTime.now()),
+                    amount: '\$1,28,034.64',
+                    category: 'Financing',
+                    action: 'Quote',
+                    subAction: 'Self',
+                  ),
+                  ReuseableContainer(
+                    imageAsset: 'images/icon/Apple.png',
+                    title: 'AAPL',
+                    date: DateFormat('MM/d/yyyy').format(DateTime.now()),
+                    time: DateFormat('h:mm a').format(DateTime.now()),
+                    amount: '\$1,28,034.64',
+                    category: 'Financing',
+                    action: 'Quote',
+                    subAction: 'Self',
+                  ),
+                  ReuseableContainer(
+                    imageAsset: 'images/icon/Apple.png',
+                    title: 'AAPL',
+                    date: DateFormat('MM/d/yyyy').format(DateTime.now()),
+                    time: DateFormat('h:mm a').format(DateTime.now()),
+                    amount: '\$1,28,034.64',
+                    category: 'Financing',
+                    action: 'Quote',
+                    subAction: 'Self',
+                  ),
+                  ReuseableContainer(
+                    imageAsset: 'images/icon/Netflix.png',
+                    title: 'NETFLIX',
+                    date: DateFormat('MM/d/yyyy').format(DateTime.now()),
+                    time: DateFormat('h:mm a').format(DateTime.now()),
+                    amount: '\$1,28,034.64',
+                    category: 'Sale',
+                    action: 'Quote',
+                    subAction: 'Agent',
+                  ),
+                  ReuseableContainer(
+                    imageAsset: 'images/icon/google.png',
+                    title: 'GOOGL',
+                    date: DateFormat('MM/d/yyyy').format(DateTime.now()),
+                    time: DateFormat('h:mm a').format(DateTime.now()),
+                    amount: '\$1,28,034.64',
+                    category: 'Financing',
+                    action: 'Quote',
+                    subAction: 'Self',
+                  ),
+                  ReuseableContainer(
+                    imageAsset: 'images/icon/Meta.png',
+                    title: 'META',
+                    date: DateFormat('MM/d/yyyy').format(DateTime.now()),
+                    time: DateFormat('h:mm a').format(DateTime.now()),
+                    amount: '\$1,28,034.64',
+                    category: 'Financing',
+                    action: 'Quote',
+                    subAction: 'Self',
+                  ),
+                  ReuseableContainer(
+                    imageAsset: 'images/icon/Twitter.png',
+                    title: 'TWITER',
+                    date: DateFormat('MM/d/yyyy').format(DateTime.now()),
+                    time: DateFormat('h:mm a').format(DateTime.now()),
+                    amount: '\$1,28,034.64',
+                    category: 'Financing',
+                    action: 'Quote',
+                    subAction: 'Self',
+                  ),
                 ],
               ),
-            )
-          ],
+            ],
+          ),
         ),
       ),
     );
