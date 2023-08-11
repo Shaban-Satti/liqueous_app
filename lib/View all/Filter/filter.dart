@@ -1,5 +1,50 @@
 import 'package:flutter/material.dart';
 
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Radio Button Example',
+      home: MainScreen(),
+    );
+  }
+}
+
+class MainScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Radio Button Example'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.filter_list),
+            onPressed: () {
+              _showFilterDialog(context);
+            },
+          ),
+        ],
+      ),
+      body: Center(
+        child: Text('Tap the filter icon'),
+      ),
+    );
+  }
+
+  Future<void> _showFilterDialog(BuildContext context) async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return FilterDialog();
+      },
+    );
+  }
+}
+
 class FilterDialog extends StatefulWidget {
   @override
   _FilterDialogState createState() => _FilterDialogState();

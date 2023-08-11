@@ -17,15 +17,6 @@ class ViewAllScreen extends StatefulWidget {
 }
 
 class _ViewAllScreenState extends State<ViewAllScreen> {
-  Future<void> _showFilterDialog(BuildContext context) async {
-    await showDialog(
-      context: context,
-      builder: (BuildContext dialogContext) {
-        return FilterDialog();
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -255,6 +246,15 @@ class _ViewAllScreenState extends State<ViewAllScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> _showFilterDialog(BuildContext context) async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return FilterDialog();
+      },
     );
   }
 }
